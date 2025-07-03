@@ -4,13 +4,13 @@ using UnityEngine;
 public class Exploder : MonoBehaviour
 {
      private float _explosionRadius = 10f;
-     private float _explosionForce = 1000f;
+     private float _explosionForce = 2000f;
 
-    public void Explode(List<Rigidbody> rigidBodies)
+    public void Explode(IEnumerable<Rigidbody> explodableObjects, Vector3 position)
     {
-        foreach (Rigidbody  rigidBody in rigidBodies)
+        foreach (Rigidbody  explodableObject in explodableObjects)
         {
-            rigidBody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
+            explodableObject.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
         }
     }  
 }
