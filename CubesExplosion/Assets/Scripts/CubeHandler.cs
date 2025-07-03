@@ -26,7 +26,6 @@ public class CubeInteractionHandler : MonoBehaviour
         {
             IEnumerable<Rigidbody> rigidbodies = _spawner.Spawn(cube.transform.position, cube.transform.localScale, cube.CurrentSplitChance);
             _exploder.Explode(rigidBodies);
-
         }
 
         Destroy(cube.gameObject);
