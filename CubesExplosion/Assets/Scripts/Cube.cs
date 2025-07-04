@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    private float _maxSplitChance = 1f;
-    private float _currentSplitChance;
+    private const float MaxSplitChance = 1f;
 
-    public float CurrentSplitChance => _currentSplitChance;
+    public float CurrentSplitChance { get; private set; }
 
     private void Awake()
     {
-        _currentSplitChance = _maxSplitChance;
+        CurrentSplitChance = MaxSplitChance;
     }
 
-    public void Setup(float splitChance)
+    public void Setup(float splitChance, Vector3 scale)
     {
-        _currentSplitChance = splitChance;
+        CurrentSplitChance = splitChance;
+        transform.localScale = scale;
     }
 }
