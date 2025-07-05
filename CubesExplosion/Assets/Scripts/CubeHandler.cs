@@ -24,7 +24,7 @@ public class CubeHandler : MonoBehaviour
         if (UnityEngine.Random.value <= cube.CurrentSplitChance)
         {
             IEnumerable<Rigidbody> rigidbodies = _spawner.Spawn(cube.transform.position, cube.transform.localScale, cube.CurrentSplitChance);
-            _exploder.Explode(rigidBodies);
+            _exploder.Explode(cube);
         }
 
         Destroy(cube.gameObject);
