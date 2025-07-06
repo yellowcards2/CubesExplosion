@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Если шанс деления меньше чем нужно нужно просто взорвать куб (разбросать ближайшие кубы), 
-//иначе заспавнить новые и разбросать только заспавненные.
-
 public class CubeHandler : MonoBehaviour
 {
     [SerializeField] private Raycaster _raycaster;
@@ -22,10 +19,10 @@ public class CubeHandler : MonoBehaviour
 
     private void HandleHit(Cube cube)
     {
-
-        if (cube.IsSplitted)
+        if (Random.value <= cube.CurrentSplitChance)
         {
             _spawner.Spawn(cube);
+            _exploder.Explode(cube);
         }
         else
         {
