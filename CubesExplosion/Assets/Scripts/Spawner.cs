@@ -10,26 +10,23 @@ public class Spawner : MonoBehaviour
     private float _scaleDivider = 2f;
     private float _splitChanceDivider = 2f;
 
-    public IEnumerable<Rigidbody> Spawn(Vector3 position, Vector3 scale, float splitChance)
+    public IEnumerable<Rigidbody> Spawn(Cube cube)
     {
-        List<Rigidbody> rigidbodies = new();
+        int cubeCount = Random.Range(_spawnCountMin, _spawnCountMax + 1);
 
-        int count = Random.Range(_spawnCountMin, _spawnCountMax);
-        float reducedChance = splitChance / _splitChanceDivider;
+        float newSplitChance = cube.CurrentSplitChance / _splitChanceDivider;
+        Vector3 newSize = cube.transform.localScale / _scaleDivider;
 
-        for (int i = 0; i < count; i++)
+        List<Rigidbody> newCubes = new();
+
+        for (int i = 0; i < cubeCount; i++)
         {
-            Cube cube = Instantiate(_cubePrefab, position, Quaternion.identity);
-            Vector3 cubeSize  = scale / _scaleDivider;
-            cube.Setup(reducedChance,cubeSize);
-
-            if (cube.TryGetComponent(out Rigidbody rigidbody))
-            {
-                rigidbodies.Add(rigidbody);
-            }
+            Cube newCube = Instantiate(_cubePrefab, cube.transform.position, Quaternion.identity);
+            newCube.Setup(newSplitChance, newSize);
+            newCubes.Add(newCube.Rigidbody);
         }
 
-        return rigidbodies;
-    }
+        return newCubes;
+    }   
 }
 
